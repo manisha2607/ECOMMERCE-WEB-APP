@@ -4,8 +4,8 @@ import About from './pages/About';
 import Contact from './pages/Contact';
 import Policy from './pages/Policy';
 import PageNotFound from './pages/PageNotFound';
-import  SignUp  from './pages/Auth/SignUp';
-import  Login  from './pages/Auth/Login';
+import SignUp from './pages/Auth/SignUp';
+import Login from './pages/Auth/Login';
 import Private from "./components/routes/Private";
 import Dashboard from "./pages/users/Dashboard";
 import ForgetPassword from "./pages/Auth/ForgetPassword";
@@ -16,6 +16,7 @@ import CreateCategory from "./pages/admin/CreateCategory";
 import Profile from "./pages/users/Profile"
 import Orders from "./pages/users/Orders"
 import Product from "./pages/admin/Product";
+import UpdateProduct from "./pages/admin/UpdateProduct";
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
           <Route path="admin" element={<AdminDashboard />} />
           <Route path="admin/create-category" element={<CreateCategory />} />
           <Route path="admin/create-product" element={<CreateProduct />} />
+          <Route path="admin/products/:slug" element={<UpdateProduct />} />
           <Route path="admin/products" element={<Product />} />
           <Route path="admin/users" element={<Users />} />
         </Route>
