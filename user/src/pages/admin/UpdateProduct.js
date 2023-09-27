@@ -24,6 +24,7 @@ function UpdateProduct() {
 
     const navigate = useNavigate()
     const params = useParams()
+
     //get single product
     const getSingleProduct = async () => {
         try {
@@ -93,6 +94,25 @@ function UpdateProduct() {
         } catch (error) {
             console.log("Error", error)
             toast.error("Something Wenr Wrong!")
+        }
+    }
+    // calling api for delete the product
+    const handleDelete = async () => {
+        try {
+            let ans = window.prompt("Are you sure to delete this product ?")
+            if (!ans) {
+                return
+            }
+            const { data } = await axios.delete(`${process.env.REACT_APP_API}/api/v1/product/delete-product/${id}`)
+            if (data?.success) {
+                toast.success(data.message)
+                navigate('/dashboard/admin/products')
+            } else {
+                toast.error(data.message)
+            }
+        } catch (error) {
+            console.log("Error", error)
+            toast.error("Something Went Wrong while deleting product!")
         }
     }
     return (
@@ -203,6 +223,11 @@ function UpdateProduct() {
                             <button className='btn btn-primary'
                                 onClick={handleUpdate}
                             >Update Product</button>
+                        </div>
+                        <div className='mb-3'>
+                            <button className='btn btn-danger'
+                                onClick={handleDelete}
+                            >Delete Product</button>
                         </div>
                     </div>
                 </div>
