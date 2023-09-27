@@ -2,14 +2,15 @@ import React, { useState, useEffect } from 'react'
 import Layout from '../components/layouts/Layout'
 import toast from 'react-hot-toast'
 import axios from 'axios'
-import { Checkbox } from 'antd'
+import { Checkbox, Radio } from 'antd'
+import { prices } from '../components/Prices'
 
 function Home() {
 
   const [products, setProducts] = useState([])
   const [categories, setCategories] = useState([])
   const [checked, setChecked] = useState([])
-
+  const [radio, setRadio] = useState([])
   // getting all products
   const getAllProducts = async () => {
     try {
@@ -57,10 +58,12 @@ function Home() {
     if (value) {
       all.push(id)
     } else {
-      console.log(all)
-      setChecked(all)
+      all = all.filter((c) => c !== id)
     }
+    console.log(all)
+    setChecked(all)
   }
+  console.log(prices)
   return (
     <Layout title={"Home-Page "}>
       <div className='row mt-3'>
@@ -73,6 +76,16 @@ function Home() {
               {c.name}
             </Checkbox>
           ))}
+          <h5 className='text-center mt-3'> Filter by price</h5>
+          <Radio.Group onChange={(e) => setRadio(e.target.value)}>
+            {prices?.map((p) => (
+              <div key={p._id}>
+                <Radio value={p.array}>
+                  {p.name}
+                </Radio>
+              </div>
+            ))}
+          </Radio.Group>
         </div>
         <div className='col-md-10'>
           <div className='d-flex flex-wrap'>
